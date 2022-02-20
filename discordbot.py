@@ -3,7 +3,7 @@ from os import getenv
 import traceback
 import re
 
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix='/')
 
 
 @bot.event
