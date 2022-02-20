@@ -21,9 +21,9 @@ async def ping(ctx):
 
 @bot.command()
 async def niku(ctx, arg):
-    l = arg.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace(
+    re_arg = arg.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace(
         "ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
-    await ctx.send(l)
+    await ctx.send(re_arg)
 
 
 @bot.event
