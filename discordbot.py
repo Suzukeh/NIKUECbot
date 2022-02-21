@@ -3,7 +3,7 @@ from os import getenv
 import traceback
 import re
 
-bot = commands.Bot(command_prefix='/')
+bot = commands.Bot(command_prefix='!')
 
 
 @bot.event
@@ -19,19 +19,30 @@ async def ping(ctx):
     await ctx.send('pong')
 
 
+@bot.event
+async def on_ready():
+    print('Done Login')
+    ch_id = 944594171585499199  # ここにID
+    channel = bot.get_channel(ch_id)
+    await channel.send('botがログインしました')
+
+nikudic = str.maketrans({"MIKUEC": "NIKEUC", "mikuec": "nikuec", "みくえっく": "にくえっく",
+                        "ミクエック": "ニクエック", "ライブ": "焼き肉", "ステージ": "プレート", "楽曲": "お肉", "曲目": "皿目", "曲": "肉"})
+
+
 @bot.command()
 async def niku(ctx, arg):
-    re_arg = arg.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace(
-        "ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
+    # re_arg = arg.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace("ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
+    re_arg = arg.translate(nikudic)
     await ctx.send(re_arg)
 
 
-@bot.event
+@ bot.event
 async def on_message(message):
     sniku = re.search(r'MIKUEC|mikuec|みくえっく|ライブ|ステージ|曲', message.content)
     if (sniku is not None):
-        nikurep = message.content.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace(
-            "ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
+        # nikurep = message.content.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace("ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
+        nikurep = arg.translate(nikudic)
         await message.reply(nikurep)
 
 
