@@ -6,44 +6,51 @@ import re
 bot = commands.Bot(command_prefix='!')
 
 
-@bot.event
-async def on_command_error(ctx, error):
-    orig_error = getattr(error, "original", error)
-    error_msg = ''.join(
-        traceback.TracebackException.from_exception(orig_error).format())
-    await ctx.send(error_msg)
+nikulist = [("MIKUEC", "NIKUEC"), ("mikuec", "nikuec"), ("みくえっく", "にくえっく"),
+            ("ミクエック", "ニクエック"), ("ライブ", "焼き肉"), ("ステージ", "プレート"),
+            ("楽曲", "お肉"), ("曲目", "皿目"), ("曲", "肉")]
 
 
-@bot.command()
-async def ping(ctx):
-    await ctx.send('pong')
+def nikurep(line):
+    newline = line
+    for before, after in nikulist:
+        newline = newline.replace(before, after)
+    return newline
 
 
 @bot.event
 async def on_ready():
     print('Done Login')
+
     ch_id = 944594171585499199  # ここにID
     channel = bot.get_channel(ch_id)
     await channel.send('botがログインしました')
 
-nikudic = str.maketrans({"MIKUEC": "NIKEUC", "mikuec": "nikuec", "みくえっく": "にくえっく",
-                        "ミクエック": "ニクエック", "ライブ": "焼き肉", "ステージ": "プレート", "楽曲": "お肉", "曲目": "皿目", "曲": "肉"})
+
+@bot.command(name="ping")
+async def ping(ctx):
+    await ctx.channel.send("pong")
 
 
-@bot.command()
-async def niku(ctx, arg):
-    # re_arg = arg.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace("ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
-    re_arg = arg.translate(nikudic)
-    await ctx.send(re_arg)
-
-
-@ bot.event
+@bot.listen()
 async def on_message(message):
+    if message.author.bot:
+        return
+    if re.match(r'!', message.content):
+        return
     sniku = re.search(r'MIKUEC|mikuec|みくえっく|ライブ|ステージ|曲', message.content)
     if (sniku is not None):
-        # nikurep = message.content.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace("ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
-        nikurep = arg.translate(nikudic)
-        await message.reply(nikurep)
+        re_mess = nikurep(message.content)
+        await message.reply(re_mess)
+        await bot.process_commands(message)
+
+
+@bot.command(name="niku")
+async def niku(ctx, arg):
+    if ctx.author.bot:
+        return
+    re_arg = nikurep(arg)
+    await ctx.send(re_arg)
 
 
 token = getenv('DISCORD_BOT_TOKEN')
