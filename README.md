@@ -1,36 +1,29 @@
-# discordpy-startup
+# NIKUEC-bot
+Chrome拡張機能の[NIKUECコンバーター](https://github.com/Suzukeh/NIKUEC-Converter)をDiscord Botにしてみました。
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+詳しいことはコンバーターの記事を見てください。<br>
+[誰でもカンタン！ クソコラ拡張機能の作り方](https://suzuke.dev/posts/reprints/nikuec-converter/)
 
-- Herokuでdiscord.pyを始めるテンプレートです。
-- Use Template からご利用ください。
-- 使い方はこちら： [Discord Bot 最速チュートリアル【Python&Heroku&GitHub】 - Qiita](https://qiita.com/1ntegrale9/items/aa4b373e8895273875a8)
 
-## 各種ファイル情報
+## 招待リンク
+https://discord.com/api/oauth2/authorize?client_id=944586587767971871&permissions=274877910016&scope=bot
 
-### discordbot.py
-PythonによるDiscordBotのアプリケーションファイルです。
+## 機能
 
-### requirements.txt
-使用しているPythonのライブラリ情報の設定ファイルです。
+### !niku コマンド
 
-### Procfile
-Herokuでのプロセス実行コマンドの設定ファイルです。
+```
+!niku foo
+```
 
-### runtime.txt
-Herokuでの実行環境の設定ファイルです。
 
-### app.json
-Herokuデプロイボタンの設定ファイルです。
+![](img/02-21-18-48-56.png)
 
-### .github/workflows/flake8.yaml
-GitHub Actions による自動構文チェックの設定ファイルです。
+### 勝手に置換
 
-### .gitignore
-Git管理が不要なファイル/ディレクトリの設定ファイルです。
 
-### LICENSE
-このリポジトリのコードの権利情報です。MITライセンスの範囲でご自由にご利用ください。
 
-### README.md
-このドキュメントです。
+## 構成
+
+この記事に従ってHerokuで動かしています。<br>
+[Discord Bot 最速チュートリアル【Python&Heroku&GitHub】](https://qiita.com/1ntegrale9/items/aa4b373e8895273875a8)
