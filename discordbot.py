@@ -22,10 +22,6 @@ def nikurep(line):
 async def on_ready():
     print('Done Login')
 
-    ch_id = 944594171585499199  # ここにID
-    channel = bot.get_channel(ch_id)
-    await channel.send('botがログインしました')
-
 
 @bot.command(name="ping")
 async def ping(ctx):
