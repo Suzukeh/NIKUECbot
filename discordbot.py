@@ -28,8 +28,8 @@ async def niku(ctx, arg):
 
 @bot.event
 async def on_message(message):
-    s = re.search(r'MIKUEC|mikuec|みくえっく|ライブ|ステージ|曲', message.content)
-    if (s is not None):
+    sniku = re.search(r'MIKUEC|mikuec|みくえっく|ライブ|ステージ|曲', message.content)
+    if (sniku is not None):
         nikurep = message.content.replace("MIKUEC", "NIKUEC").replace("mikuec", "nikuec").replace("みくえっく", "にくえっく").replace(
             "ライブ", "焼き肉").replace("ステージ", "プレート").replace("楽曲", "お肉").replace("曲目", "皿目").replace("曲", "肉")
         await message.reply(nikurep)
