@@ -27,7 +27,7 @@ async def on_ready():
 async def ping(ctx):
     await ctx.channel.send("pong")
 
-
+"""
 @bot.listen()
 async def on_message(message):
     if message.author.bot:
@@ -39,6 +39,7 @@ async def on_message(message):
         re_mess = nikurep(message.content)
         await message.reply(re_mess)
         await bot.process_commands(message)
+"""
 
 
 @bot.command(name="niku")
