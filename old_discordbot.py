@@ -27,6 +27,20 @@ async def on_ready():
 async def ping(ctx):
     await ctx.channel.send("pong")
 
+"""
+@bot.listen()
+async def on_message(message):
+    if message.author.bot:
+        return
+    if re.match(r'!', message.content):
+        return
+    sniku = re.search(r'MIKUEC|mikuec|みくえっく|ライブ|ステージ|曲', message.content)
+    if (sniku is not None):
+        re_mess = nikurep(message.content)
+        await message.reply(re_mess)
+        await bot.process_commands(message)
+"""
+
 
 @bot.command(name="niku")
 async def niku(ctx, arg):
